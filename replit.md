@@ -30,13 +30,13 @@ An Android-first fitness companion that turns activity, workout, sleep, and reco
 
 ## Architecture decisions
 
-- Phase 1 is frontend-only and uses explicitly labeled DEMO DATA; Health Connect is deferred until the basic app is confirmed working.
+- Phase 1 started frontend-only with explicitly labeled DEMO DATA; Phase 2 now reads real Health Connect data when running in a native Android development build.
 - The first build uses Expo Router with five primary sections: Home, Workout, Recovery, Progress, and Profile.
 - FitTrack's palette uses midnight green, lime, and soft sage to make readiness and action states easy to scan.
 
 ## Product
 
-Phase 1 provides a mobile dashboard with readiness, daily metrics, suggested training, recovery context, weekly progress, and account/settings entry points. Future phases will connect Health Connect and wearables.
+Phase 1 provides a mobile dashboard with readiness, daily metrics, suggested training, recovery context, weekly progress, and account/settings entry points. Phase 2 adds real Health Connect permission handling and daily reads for steps, heart rate, resting heart rate, sleep, exercise, calories, distance, and HRV.
 
 ## User preferences
 
@@ -46,6 +46,7 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 - Keep app-generated fitness estimates clearly distinguished from medical advice.
 - Do not replace DEMO DATA with fabricated wearable readings; real health metrics must come from Health Connect or wearable APIs.
+- Health Connect cannot run inside Expo Go; use a native Android development build to exercise the bridge.
 
 ## Pointers
 
