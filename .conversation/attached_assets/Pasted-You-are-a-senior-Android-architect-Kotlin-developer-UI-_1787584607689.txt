@@ -1,0 +1,859 @@
+You are a senior Android architect, Kotlin developer, UI/UX designer,
+fitness technology engineer, database architect, and product engineer.
+
+I want you to help me build a production-quality Android fitness application
+called "FitTrack".
+
+IMPORTANT:
+Do NOT give me a toy/demo application.
+Build the project with a scalable, professional architecture that can
+eventually support millions of users.
+
+The application should connect to Android health platforms and compatible
+smartwatches/fitness trackers, collect fitness data, analyze it, track
+workouts and recovery, and provide personalized fitness recommendations.
+
+==================================================
+1. PRODUCT VISION
+==================================================
+
+Build an Android-first fitness ecosystem combining:
+
+- Fitness tracker
+- Workout tracker
+- Sleep tracker
+- Recovery tracker
+- Wearable integration
+- Training-load analysis
+- Personalized fitness recommendations
+- Progress tracking
+- AI fitness assistant
+
+The goal is NOT simply to display smartwatch data.
+
+The application should transform health/fitness data into useful insights.
+
+Example:
+
+INPUT:
+Sleep = 6h 10m
+Resting HR = elevated
+HRV = lower than baseline
+Yesterday training load = high
+
+OUTPUT:
+
+Recovery Score: 48/100
+
+Recommendation:
+"Your recovery appears lower than your recent baseline.
+Consider a lighter workout today and prioritize recovery."
+
+Do NOT make medical diagnoses.
+Clearly distinguish wellness/fitness estimates from medical advice.
+
+==================================================
+2. TECHNOLOGY STACK
+==================================================
+
+ANDROID:
+
+- Kotlin
+- Jetpack Compose
+- Material 3
+- Android Jetpack
+- Coroutines
+- Flow
+- ViewModel
+- Navigation Compose
+- Hilt dependency injection
+- Room database
+
+HEALTH:
+
+- Android Health Connect
+- Wear OS Health Services
+- Health Connect permissions
+- Heart rate
+- Steps
+- Distance
+- Calories
+- Sleep
+- Exercise/workout data
+- Resting heart rate
+- HRV where available
+
+BACKEND:
+
+- TypeScript
+- Next.js
+- PostgreSQL
+- Prisma
+- REST or tRPC
+- JWT/OAuth-based authentication
+
+INFRASTRUCTURE:
+
+- Clean Architecture
+- MVVM
+- Repository pattern
+- Dependency injection
+- Offline-first principles
+- Secure storage
+- Logging
+- Error handling
+
+==================================================
+3. PROJECT ARCHITECTURE
+==================================================
+
+Use a professional architecture.
+
+Android:
+
+app/
+  data/
+    health/
+    local/
+    remote/
+    repository/
+
+  domain/
+    model/
+    repository/
+    usecase/
+    fitness/
+
+  presentation/
+    dashboard/
+    workout/
+    sleep/
+    recovery/
+    progress/
+    profile/
+    settings/
+
+  core/
+    database/
+    network/
+    security/
+    common/
+    navigation/
+    ui/
+
+Do NOT put business logic inside Activities or Composables.
+
+Use:
+
+UI
+ ↓
+ViewModel
+ ↓
+Use Case
+ ↓
+Repository
+ ↓
+Data Source
+
+==================================================
+4. MAIN APP FEATURES
+==================================================
+
+Create the following sections:
+
+1. Onboarding
+2. Authentication
+3. Dashboard
+4. Health data
+5. Workout tracker
+6. Workout history
+7. Sleep
+8. Recovery
+9. Progress
+10. Goals
+11. Wearable connection
+12. Notifications
+13. Profile
+14. Settings
+15. AI fitness assistant
+
+Bottom navigation:
+
+HOME
+WORKOUT
+RECOVERY
+PROGRESS
+PROFILE
+
+==================================================
+5. ONBOARDING
+==================================================
+
+Create a beautiful onboarding flow.
+
+Ask:
+
+- Name
+- Age
+- Gender (optional)
+- Height
+- Weight
+- Fitness level
+- Primary goal
+- Target weight (optional)
+- Workout frequency
+- Preferred workout type
+- Sleep goal
+- Daily activity level
+
+Goals:
+
+- Build muscle
+- Lose fat
+- Improve fitness
+- Increase strength
+- Improve endurance
+- General health
+
+Do not force users to provide unnecessary personal information.
+
+==================================================
+6. HEALTH CONNECT
+==================================================
+
+Implement Health Connect properly.
+
+Create:
+
+HealthConnectManager
+
+Responsibilities:
+
+- Check availability
+- Request permissions
+- Read health records
+- Handle permission denial
+- Handle missing Health Connect
+- Handle unsupported data types
+- Handle Android version differences
+- Handle errors
+- Sync health data
+
+Initially support:
+
+- Steps
+- Heart rate
+- Resting heart rate
+- Sleep sessions
+- Exercise sessions
+- Calories
+- Distance
+- HRV when available
+
+Do NOT request every permission automatically.
+
+Ask only for permissions necessary for enabled features.
+
+Create clean models that normalize Health Connect data.
+
+Example:
+
+HealthMetric
+
+id
+userId
+metricType
+value
+unit
+timestamp
+source
+createdAt
+
+==================================================
+7. WEAR OS
+==================================================
+
+Create a separate Wear OS module.
+
+Use Wear OS Health Services for real-time workout information.
+
+Support:
+
+- Heart rate
+- Calories
+- Distance
+- Pace
+- Speed
+- Exercise duration
+- Exercise type
+
+The architecture should allow future wearable integrations.
+
+Do NOT hard-code the application around one smartwatch manufacturer.
+
+Create a normalized wearable interface:
+
+WearableDataSource
+
+Possible implementations:
+
+HealthConnectDataSource
+WearOSDataSource
+FutureGarminDataSource
+FutureFitbitDataSource
+FutureSamsungDataSource
+
+==================================================
+8. DASHBOARD
+==================================================
+
+Create a modern premium fitness dashboard.
+
+Display:
+
+- Today's readiness/recovery
+- Steps
+- Heart rate
+- Calories
+- Sleep duration
+- Workout status
+- Weekly activity
+- Goal progress
+
+Example:
+
+GOOD MORNING
+
+Recovery
+82 / 100
+
+Steps
+7,842
+
+Heart Rate
+68 BPM
+
+Sleep
+7h 42m
+
+Calories
+1,840 kcal
+
+TODAY'S RECOMMENDATION
+
+Upper Body Strength
+50 min
+Moderate intensity
+
+[ START WORKOUT ]
+
+Use attractive cards, charts and progress indicators.
+
+Avoid clutter.
+
+==================================================
+9. WORKOUT TRACKER
+==================================================
+
+Create an exercise database.
+
+Categories:
+
+Chest
+Back
+Shoulders
+Arms
+Legs
+Core
+Cardio
+Full Body
+
+Exercise fields:
+
+- Name
+- Muscle group
+- Equipment
+- Instructions
+- Difficulty
+- Video/image URL
+- Primary muscles
+- Secondary muscles
+
+Workout tracking:
+
+- Exercise
+- Sets
+- Reps
+- Weight
+- Duration
+- Rest time
+- RPE
+- Heart rate
+- Calories
+
+Allow:
+
+- Create workout
+- Edit workout
+- Delete workout
+- Start workout
+- Pause workout
+- Complete workout
+- Save workout
+- Repeat workout
+
+==================================================
+10. PROGRESS TRACKING
+==================================================
+
+Track:
+
+- Weight
+- Body measurements
+- Workout volume
+- Strength progression
+- Reps
+- Sets
+- Personal records
+- Steps
+- Calories
+- Sleep
+- Recovery
+- Training frequency
+
+Create graphs:
+
+Weight over time
+Strength over time
+Workout volume
+Weekly activity
+Sleep trend
+Recovery trend
+Heart-rate trend
+
+==================================================
+11. RECOVERY ENGINE
+==================================================
+
+Build a modular fitness/recovery scoring system.
+
+Do NOT claim the score is medically validated.
+
+Create:
+
+RecoveryCalculator
+
+Inputs may include:
+
+- Sleep duration
+- Sleep consistency
+- Resting heart rate
+- HRV
+- Previous training load
+- Recent activity
+- Workout frequency
+
+Output:
+
+Recovery score: 0-100
+
+Classification:
+
+0-30 = Poor
+31-50 = Low
+51-70 = Moderate
+71-85 = Good
+86-100 = Excellent
+
+Make the weighting configurable.
+
+DO NOT hard-code the system so it cannot evolve.
+
+Example:
+
+sleepWeight
+restingHeartRateWeight
+hrvWeight
+trainingLoadWeight
+activityWeight
+
+Store these in configuration.
+
+==================================================
+12. TRAINING LOAD
+==================================================
+
+Create a training-load engine.
+
+Initially support a simple transparent model.
+
+Use:
+
+Workout duration
+Intensity/RPE
+Heart-rate information when available
+
+Calculate:
+
+Daily training load
+Weekly training load
+Acute load
+Chronic trend
+Training strain
+
+Clearly label these as app-generated fitness estimates.
+
+==================================================
+13. PERSONALIZED RECOMMENDATIONS
+==================================================
+
+Create RecommendationEngine.
+
+Inputs:
+
+- User goal
+- Recovery score
+- Sleep
+- Recent workouts
+- Training load
+- Activity
+- Workout history
+
+Outputs:
+
+- Workout recommendation
+- Intensity recommendation
+- Recovery recommendation
+- Rest-day recommendation
+- Cardio recommendation
+- Mobility recommendation
+
+Example:
+
+Recovery > 80:
+Recommend normal training.
+
+Recovery 60-80:
+Recommend moderate training.
+
+Recovery 40-60:
+Recommend reduced intensity.
+
+Recovery < 40:
+Recommend recovery/light activity.
+
+Make the rules configurable.
+
+==================================================
+14. AI FITNESS ASSISTANT
+==================================================
+
+Create an AI assistant interface.
+
+The assistant should answer questions such as:
+
+"What should I train today?"
+
+"Why is my recovery low?"
+
+"How did I perform this week?"
+
+"Should I take a rest day?"
+
+"How is my sleep affecting my training?"
+
+"Create me a 4-day workout plan."
+
+The AI must use the user's application data as context.
+
+Do not allow the AI to diagnose diseases or replace medical professionals.
+
+Add safety messaging when appropriate.
+
+==================================================
+15. NOTIFICATIONS
+==================================================
+
+Create notifications for:
+
+- Workout reminders
+- Sleep reminders
+- Goal reminders
+- Recovery updates
+- Inactivity reminders
+- Weekly reports
+
+Do not spam users.
+
+Allow notification preferences.
+
+==================================================
+16. DATABASE
+==================================================
+
+Design a normalized PostgreSQL database.
+
+Tables should include:
+
+User
+Profile
+Goal
+HealthMetric
+HeartRateRecord
+SleepSession
+Workout
+WorkoutExercise
+Exercise
+WorkoutSet
+RecoveryScore
+TrainingLoad
+DailyActivity
+ProgressRecord
+WearableConnection
+Notification
+UserSettings
+AIConversation
+AIMessage
+
+Add:
+
+- UUID primary keys
+- timestamps
+- indexes
+- foreign keys
+- appropriate constraints
+
+Use Prisma migrations.
+
+==================================================
+17. SECURITY
+==================================================
+
+Implement:
+
+- Secure authentication
+- Secure token storage
+- Encryption where appropriate
+- HTTPS
+- Input validation
+- Permission handling
+- Least-privilege health permissions
+- Secure API endpoints
+
+Health information is sensitive.
+
+Do not log raw health information unnecessarily.
+
+==================================================
+18. OFFLINE SUPPORT
+==================================================
+
+The application should continue functioning without internet.
+
+Use Room for local storage.
+
+When internet becomes available:
+
+Local data
+ ↓
+Sync engine
+ ↓
+Backend
+ ↓
+PostgreSQL
+
+Implement conflict handling.
+
+==================================================
+19. UI/UX
+==================================================
+
+Design style:
+
+- Modern
+- Premium
+- Minimal
+- Fitness-focused
+- Fast
+- Accessible
+
+Use Material 3.
+
+Support:
+
+- Light mode
+- Dark mode
+- Dynamic colors where appropriate
+- Accessibility
+- Large text
+- Screen readers
+
+Animations should be subtle.
+
+Avoid excessive animation.
+
+==================================================
+20. ERROR HANDLING
+==================================================
+
+Every external operation must handle:
+
+- Network failure
+- Permission denied
+- Missing Health Connect
+- Unsupported device
+- Invalid data
+- Authentication failure
+- Database failure
+- API failure
+- Timeout
+
+Never crash the application because health data is unavailable.
+
+Show useful user-facing messages.
+
+==================================================
+21. TESTING
+==================================================
+
+Create:
+
+- Unit tests
+- Repository tests
+- ViewModel tests
+- Fitness engine tests
+- Recovery calculator tests
+- Recommendation engine tests
+- Database tests
+
+Create test cases for:
+
+- Missing sleep data
+- Missing HRV
+- No wearable connected
+- Permission denied
+- Very high training load
+- Very low recovery
+- New user with no history
+
+==================================================
+22. DEVELOPMENT STRATEGY
+==================================================
+
+DO NOT generate the entire project in one giant response.
+
+Build incrementally.
+
+PHASE 1:
+Create Android project
+Create architecture
+Create navigation
+Create basic UI
+
+PHASE 2:
+Implement Health Connect
+Implement permissions
+Read steps
+Read heart rate
+Read sleep
+Read exercise
+
+PHASE 3:
+Build dashboard
+
+PHASE 4:
+Build workout tracker
+
+PHASE 5:
+Build recovery engine
+
+PHASE 6:
+Build training-load engine
+
+PHASE 7:
+Build progress charts
+
+PHASE 8:
+Build Wear OS integration
+
+PHASE 9:
+Build backend
+
+PHASE 10:
+Build authentication and cloud sync
+
+PHASE 11:
+Build AI assistant
+
+PHASE 12:
+Testing
+Security
+Performance
+Release preparation
+
+==================================================
+23. HOW YOU SHOULD WORK WITH ME
+==================================================
+
+I am still learning development.
+
+Do NOT assume I understand advanced concepts.
+
+For every phase:
+
+1. Explain what we are building.
+2. Show the exact folder/file structure.
+3. Tell me exactly which file to create.
+4. Give complete code for that file.
+5. Explain where the code goes.
+6. Explain how to run it.
+7. Explain what I should see.
+8. Wait for me to confirm it works before moving forward.
+
+If there is an error:
+
+- Ask me to paste the complete error.
+- Diagnose the cause.
+- Give the exact fix.
+- Do not rewrite unrelated parts of the application.
+
+Do not give pseudocode when I need actual implementation.
+
+Do not omit imports.
+
+Do not use deprecated APIs when a current stable API exists.
+
+Before recommending a library/API, verify that it is current and compatible with the project's versions.
+
+==================================================
+24. IMPORTANT DEVELOPMENT RULE
+==================================================
+
+NEVER build fake smartwatch data and pretend it is real data.
+
+For development/testing, sample data may be used only when clearly labeled:
+
+"DEMO DATA"
+
+Real health data must come through the appropriate health/wearable APIs.
+
+==================================================
+25. START NOW
+==================================================
+
+Start with PHASE 1 only.
+
+First:
+
+1. Tell me exactly what software I need to install.
+2. Tell me the recommended versions.
+3. Create the Android project structure.
+4. Create the basic Jetpack Compose application.
+5. Create the navigation structure.
+6. Create a basic dashboard.
+7. Give me the exact files and complete code.
+8. Explain exactly how to run the application.
+
+DO NOT move to Health Connect until the basic app runs successfully.
+
+After PHASE 1 is working, stop and wait for my confirmation.

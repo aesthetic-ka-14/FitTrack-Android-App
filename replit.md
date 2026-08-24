@@ -1,6 +1,6 @@
-# [Project name]
+# FitTrack
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An Android-first fitness companion that turns activity, workout, sleep, and recovery data into clear daily insights.
 
 ## Run & Operate
 
@@ -22,15 +22,21 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/fittrack/` — Expo mobile app and file-based routes
+- `artifacts/fittrack/app/(tabs)/index.tsx` — dashboard
+- `artifacts/fittrack/constants/colors.ts` — FitTrack color tokens
+- `artifacts/fittrack/components/FitTrackUI.tsx` — shared mobile UI primitives
+- `attached_assets/Pasted-You-are-a-senior-Android-architect-Kotlin-developer-UI-_1787584607689.txt` — product specification and phased roadmap
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Phase 1 is frontend-only and uses explicitly labeled DEMO DATA; Health Connect is deferred until the basic app is confirmed working.
+- The first build uses Expo Router with five primary sections: Home, Workout, Recovery, Progress, and Profile.
+- FitTrack's palette uses midnight green, lime, and soft sage to make readiness and action states easy to scan.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Phase 1 provides a mobile dashboard with readiness, daily metrics, suggested training, recovery context, weekly progress, and account/settings entry points. Future phases will connect Health Connect and wearables.
 
 ## User preferences
 
@@ -38,7 +44,8 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Keep app-generated fitness estimates clearly distinguished from medical advice.
+- Do not replace DEMO DATA with fabricated wearable readings; real health metrics must come from Health Connect or wearable APIs.
 
 ## Pointers
 
